@@ -1,7 +1,7 @@
-###Project Name: ATLAS
+Project Name: ATLAS
 
-###Project Description: Un projecto creado para aprender a usar Arquitectura hexagonal
+Project Description: Un projecto creado para aprender a usar Arquitectura hexagonal
 
-###Project Owner: DevBorracho
+Project Owner: DevBorracho
 
-###Project URL: https://github.com/DevBorracho/ATLAS-Project
+Project URL: https://github.com/DevBorracho/ATLAS-Project
