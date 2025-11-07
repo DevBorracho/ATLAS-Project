@@ -1,0 +1,20 @@
+{
+  "name": "mega-projecto",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "jiti": "^2.6.1"
+  },
+  "peerDependencies": {
+    "typescript": " 5.9.3"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bunx tsc --project tsconfig.build.json",
+    "start": "bun run dist/index.js"
+  }
+}
