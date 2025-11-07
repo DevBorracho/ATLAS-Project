@@ -1,7 +1,15 @@
-Project Name: ATLAS
+# mega-projecto
 
-Project Description: Un projecto creado para aprender a usar Arquitectura hexagonal
+To install dependencies:
 
-Project Owner: DevBorracho
+```bash
+bun install
+```
 
-Project URL: https://github.com/DevBorracho/ATLAS-Project
+To run:
+
+```bash
+bun run index.ts
+```
+
+This project was created using `bun init` in bun v1.2.19. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
