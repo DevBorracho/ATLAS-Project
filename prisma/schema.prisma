@@ -14,3 +14,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String   @id @default(uuid())
+  username    String
+  email       String   @unique
+  password    String
+  roleId      String   // 🔹 foreign key
+  role        Role     @relation(fields: [roleId], references: [id]) // 🔹 relación
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Role {
+  id          String          @id @default(uuid())
+  name        String
+  level       String?
+  description String?
+  users       User[]          // 1:N con User
+  permissions RolePermission[] // 🔹 relación intermedia N:N con Permission
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  name        String
+  code        String           @unique
+  description String
+  roles       RolePermission[]  // 🔹 relación intermedia N:N con Role
+}
+
+model RolePermission {
+  id            String      @id @default(uuid())
+  roleId        String
+  permissionId  String
+
+  // 🔹 Relaciones
+  role          Role        @relation(fields: [roleId], references: [id])
+  permission    Permission  @relation(fields: [permissionId], references: [id])
+}
