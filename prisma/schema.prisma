@@ -27,27 +27,10 @@ model User {
 
 model Role {
   id          String          @id @default(uuid())
-  name        String
-  level       String?
-  description String?
-  users       User[]          // 1:N con User
-  permissions RolePermission[] // 🔹 relación intermedia N:N con Permission
-}
-
-model Permission {
-  id          String           @id @default(uuid())
-  name        String
-  code        String           @unique
+  name        String @unique
+  level       String
   description String
-  roles       RolePermission[]  // 🔹 relación intermedia N:N con Role
+  users       User[]          // 1:N con User
 }
 
-model RolePermission {
-  id            String      @id @default(uuid())
-  roleId        String
-  permissionId  String
 
-  // 🔹 Relaciones
-  role          Role        @relation(fields: [roleId], references: [id])
-  permission    Permission  @relation(fields: [permissionId], references: [id])
-}

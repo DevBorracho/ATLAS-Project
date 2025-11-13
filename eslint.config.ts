@@ -27,7 +27,7 @@ export default defineConfig([
       // 🧠 Buenas prácticas generales
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-unused-vars": [
-        "warn",
+        "off",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-unsafe-call": "off",
@@ -52,11 +52,10 @@ export default defineConfig([
         },
       ],
       "@typescript-eslint/no-unused-vars": [
-        "warn",
+        "off",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-explicit-any": "off",
-
       // --- Promesas seguras ---
       "@typescript-eslint/no-floating-promises": "warn",
       "@typescript-eslint/no-misused-promises": "warn",
