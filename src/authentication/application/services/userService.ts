@@ -5,7 +5,7 @@ import type IRoleRepository from "../../domain/repositories/IRoleRepository";
 import { User } from "../../domain/entities/user";
 import type { Role } from "../../domain/entities/role";
 import type { PasswordHashService } from "../../domain/services/PasswordHashService";
-export default class UserService {
+export class UserService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly hashService: PasswordHashService,

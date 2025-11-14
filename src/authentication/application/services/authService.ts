@@ -4,7 +4,7 @@ import type { JwtService } from "../../domain/services/JwtService";
 import type IRefreshTokenRepository from "../../domain/repositories/IRefreshTokenRepository";
 import type { User } from "../../domain/entities/user";
 
-export default class AuthService {
+export class AuthService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly hashService: PasswordHashService,
