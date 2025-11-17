@@ -22,8 +22,3 @@ export * from './enums.ts';
  * 
  */
 export type User = Prisma.UserModel
-/**
- * Model Role
- * 
- */
-export type Role = Prisma.RoleModel

@@ -5,52 +5,13 @@
 ### users (usuarios)
 
 - `_id`
-- `nombre`
+- `username`
 - `email`
 - `password`
-- `rolId`
+- `role`
 - `activo`
-- `avatar`
-- `fechaCreacion`
-
-### roles (roles)
-
-- `_id`
-- `nombre`
-- `nivelJerarquia`
-- `descripcion`
-
-### permissions (permisos)
-
-- `_id`
-- `nombre`
-- `codigo`
-- `descripcion`
-
-### role_permissions (rol_permisos)
-
-- `rolId`
-- `permisoId`
-
----
-
-## 👤 Usuarios y Perfiles
-
-### user_profiles (perfiles de usuario)
-
-- `_id`
-- `userId`
-- `telefono`
-- `direccion`
-- `pais`
-- `ciudad`
-
-### user_history (historial de usuario)
-
-- `_id`
-- `userId`
-- `cambios`
-- `fecha`
+- `createdAt`
+- `phone`
 
 ---
 

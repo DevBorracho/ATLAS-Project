@@ -19,18 +19,15 @@ model User {
   username    String
   email       String   @unique
   password    String
-  roleId      String   // 🔹 foreign key
-  role        Role     @relation(fields: [roleId], references: [id]) // 🔹 relación
+  phone       String
+  actived     Boolean  
+  role        Role     @default(USER)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-model Role {
-  id          String          @id @default(uuid())
-  name        String @unique
-  level       String
-  description String
-  users       User[]          // 1:N con User
-}
-
-
+enum Role{
+  ADMIN
+  USER
+  MANAGER
+} 

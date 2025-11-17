@@ -49,8 +49,3 @@ path.join(process.cwd(), "prisma/generated/prisma/query_engine-windows.dll.node"
  * 
  */
 export type User = Prisma.UserModel
-/**
- * Model Role
- * 
- */
-export type Role = Prisma.RoleModel
