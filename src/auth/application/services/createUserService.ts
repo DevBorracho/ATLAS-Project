@@ -3,7 +3,7 @@ import { User } from "../../domain/entities/User";
 import { userID } from "../../domain/valueObjects/userID";
 import { userName } from "../../domain/valueObjects/userName";
 import { userEmail } from "../../domain/valueObjects/userEmail";
-import { UserRole } from "../../domain/valueObjects/userRole";
+import type { UserRole } from "../../domain/valueObjects/userRole";
 import { userPhone } from "../../domain/valueObjects/userPhone";
 import { userPassword } from "../../domain/valueObjects/userPassword";
 
@@ -14,7 +14,7 @@ export class createUserService {
     username: string,
     password: string,
     email: string,
-    role: string,
+    role: UserRole,
     phone: string
   ): Promise<User> {
     const user = new User(
@@ -22,7 +22,7 @@ export class createUserService {
       new userName(username),
       new userEmail(email),
       new userPassword(password),
-      UserRole.USER,
+      role,
       true,
       new userPhone(phone),
       new Date()

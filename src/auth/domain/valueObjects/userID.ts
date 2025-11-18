@@ -1,6 +1,6 @@
 export class userID {
-  value: string;
-  constructor(value: string) {
+  value: string | null;
+  constructor(value: string | null) {
     this.value = value;
   }
 }
