@@ -1,11 +1,11 @@
-import type { Response } from "express";
-import type { MyRequest } from "../../../../shared/types/myRequest";
-import type { createUserService } from "../../../application/services/createUserService";
-import type { PasswordHashingService } from "../../../application/services/hashingCompare/passwordHashingService";
+import type { Response, Request } from "express";
+import type { createUserService } from "../../../application/services/createUser.Service";
+import type { PasswordHashingService } from "../../../application/services/hashingCompare/passwordHashing.Service";
 import { UserRole } from "../../../domain/valueObjects/userRole";
 
-import type { findByEmail } from "../../../application/services/findByEmailService";
+import type { findByEmail } from "../../../application/services/findByEmail.Service";
 import { createToken } from "../../utils/createToken";
+import { userPassword } from "../../../domain/valueObjects/userPassword";
 interface RegisterBody {
   username: string;
   password: string;
@@ -18,15 +18,20 @@ export class RegisterController {
     private findByEmailService: findByEmail,
     private passwordService: PasswordHashingService
   ) {}
-  async execute(req: MyRequest, res: Response): Promise<Response> {
+  async execute(req: Request, res: Response): Promise<Response> {
     try {
       const { username, email, password, phone }: RegisterBody = req.body;
       if (!username || !email || !password || !phone) {
         return res.status(400).json({ msg: "los campos son requeridos" });
       }
 
+      try {
+        new userPassword(password);
+      } catch (error: any) {
+        return res.status(400).json({ msg: error.message });
+      }
       // Verificar si el email ya existe (sin lanzar error si no existe)
-      const userfound = await this.findByEmailService.execute(email, false);
+      const userfound = await this.findByEmailService.execute(email);
       if (userfound) {
         return res
           .status(400)
@@ -38,7 +43,7 @@ export class RegisterController {
         username,
         passwordHash,
         email,
-        UserRole.ADMIN,
+        UserRole.MANAGER,
         phone
       );
       const token = await createToken({ id: user.id.value, role: user.Role });

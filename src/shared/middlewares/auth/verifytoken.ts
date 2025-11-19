@@ -1,31 +1,33 @@
-import type { Response, NextFunction } from "express";
-import type { JwtPayload } from "jsonwebtoken";
+import type { Response, NextFunction, Request } from "express";
 import jwt from "jsonwebtoken";
-import type { MyRequest } from "../../types/myRequest";
+import type { JwtUserPayload } from "../../types/auth/userPayload";
 
 export const verifyToken = (
-  req: MyRequest,
+  req: Request,
   res: Response,
   next: NextFunction
-): string | JwtPayload | undefined => {
-  try {
-    const { token } = req.cookies;
-    if (!token) {
-      return res.status(401).json({ msg: "no estas authorizado" });
-    }
-    const secret = process.env.JWT_SECRET || ("myawesomeSecret" as string);
-    jwt.verify(token as string, secret, (err, data) => {
-      if (err) {
-        return res.status(500).json({ msg: "error al verificar" });
-      }
-      req.user = data;
-      if (req.user === undefined) {
-        return res.status(500).json({ msg: "error al verificar" });
-      }
+): void => {
+  const { token } = req.cookies;
 
-      next();
-    });
-  } catch (error) {
-    return res.status(500).json({ message: "Error al validar" });
+  if (!token) {
+    res.status(401).json({ msg: "no estás autorizado" });
+    return;
+  }
+
+  const secret = process.env.JWT_SECRET || "myawesomeSecret";
+
+  try {
+    // Versión sin callback: devuelve el payload o lanza error
+    const decoded = jwt.verify(token as string, secret) as JwtUserPayload;
+
+    req.user = decoded; // aquí ya tienes el payload en tu request
+    if (!req.user) {
+      res.status(500).json({ msg: "error al verificar" });
+      return;
+    }
+
+    next(); // sigue al siguiente middleware/controlador
+  } catch (err) {
+    res.status(401).json({ msg: "token inválido o expirado" });
   }
 };
