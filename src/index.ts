@@ -6,7 +6,7 @@ import userRouter from "./auth/infrastructure/http/routes/user.route";
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use("/api/auth", userRouter);
+app.use("/api/user", userRouter);
 const PORT: string | number = process.env.PORT ?? 3000;
 app.listen(PORT, () => {
   console.log(`server running in ${PORT} 🚀🚀`);
